@@ -19,7 +19,7 @@ export default function SignUp() {
       </div>
 
       {/* Text Fields */}
-      <div className=" text-base flex-col flex" style={{gap: 10}}>
+      <div className=" text-base flex-col flex" style={{ gap: 10 }}>
         <div>
           Name
           <TextField fullWidth placeholder="Name" />
@@ -87,6 +87,9 @@ export default function SignUp() {
         >
           <Image alt="google" src={"/google_icon.png"} width={30} height={30} />
         </div>
+      </div>
+      <div className="text-[#0D1F40] flex items-center justify-center">
+        Already have an account? <Link href={'/login'} style={{fontWeight: 500}}>Login Now</Link>
       </div>
     </div>
   );
