@@ -12,5 +12,5 @@ export default async function getLocation(input: string) {
 
   console.log("from getLocation.ts", arr);
 
-  return { from: arr[0], destination: arr[1] };
+  return arr;
 }

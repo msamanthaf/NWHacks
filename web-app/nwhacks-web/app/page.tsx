@@ -57,69 +57,74 @@ export default function NavigationExample() {
     }
 
     // get location from text
-    const locationJSON = getLocation(
-      "I want to go to the washroom, i am beside the stairs"
-    );
-    if (locationJSON) console.log("cwecfewfe",locationJSON.from);
+    let locationArray: any = [];
 
-    /*
-     * All maps made in Maker will contain a location called "footprintcomponent"
-     * which represents the exterior "footprint"
-     * You can use this location to get the nearest entrance or exit
-     */
-    const startLocation = venue.locations.find((location) =>
-      location.id.includes(locationJSON.from)
-    );
-    // Navigate to some location on another floor
-    const endLocation = venue.locations.find((location) =>
-      location.id.includes(locationJSON.destination)
-    );
+    getLocation("I am beside teapot right now, where can i find delly").then(
+      (data) => {
+        locationArray = data;
 
-    if (startLocation && endLocation) {
-      // Generate a route between these two locations
-      const directions = startLocation.directionsTo(endLocation);
-      if (directions && directions.path.length > 0) {
-        // The Journey class draws the path & can be configured with a few options
-        mapView.Journey.draw(directions, {
-          polygonHighlightColor: "#e74c3c", // Start and end polygons colour
-          departureMarkerTemplate: (props) => {
-            // The departure marker is the person at the start location
-            return `<div style="display: flex; flex-direction: column; justify-items: center; align-items: center;">
+        console.log(locationArray[0]);
+
+        /*
+         * All maps made in Maker will contain a location called "footprintcomponent"
+         * which represents the exterior "footprint"
+         * You can use this location to get the nearest entrance or exit
+         */
+        const startLocation = venue.locations.find((location) =>
+          location.id.includes(locationArray[0])
+        );
+        // Navigate to some location on another floor
+        const endLocation = venue.locations.find((location) =>
+          location.id.includes(locationArray[1])
+        );
+
+        if (startLocation && endLocation) {
+          // Generate a route between these two locations
+          const directions = startLocation.directionsTo(endLocation);
+          if (directions && directions.path.length > 0) {
+            // The Journey class draws the path & can be configured with a few options
+            mapView.Journey.draw(directions, {
+              polygonHighlightColor: "#e74c3c", // Start and end polygons colour
+              departureMarkerTemplate: (props) => {
+                // The departure marker is the person at the start location
+                return `<div style="display: flex; flex-direction: column; justify-items: center; align-items: center;">
             <div class="departure-marker">${
               props.location ? props.location.name : "Departure"
             }</div>
             ${props.icon}
             </div>`;
-          },
-          destinationMarkerTemplate: (props) => {
-            // The destination marker is the pin at the end location
-            return `<div style="display: flex; flex-direction: column; justify-items: center; align-items: center;">
+              },
+              destinationMarkerTemplate: (props) => {
+                // The destination marker is the pin at the end location
+                return `<div style="display: flex; flex-direction: column; justify-items: center; align-items: center;">
             <div class="destination-marker">${
               props.location ? props.location.name : "Destination"
             }</div>
             ${props.icon}
             </div>`;
-          },
-          connectionTemplate: (props) => {
-            // The connection marker is the button to switch floors on the map
-            return `<div class="connection-marker">Take ${props.type} ${props.icon}</div>`;
-          },
-          pathOptions: {
-            nearRadius: 0.25, // The path size in metres at the nearest zoom
-            farRadius: 1, // The path size in metres at the furthest zoom
-            color: "#40A9FF", // Path colour
-            displayArrowsOnPath: false, // Arrow animation on path
-            showPulse: true, // Pulse animation on path
-            pulseIterations: Infinity, // How many times to play the pulse animation
-          },
-        });
+              },
+              connectionTemplate: (props) => {
+                // The connection marker is the button to switch floors on the map
+                return `<div class="connection-marker">Take ${props.type} ${props.icon}</div>`;
+              },
+              pathOptions: {
+                nearRadius: 0.25, // The path size in metres at the nearest zoom
+                farRadius: 1, // The path size in metres at the furthest zoom
+                color: "#40A9FF", // Path colour
+                displayArrowsOnPath: false, // Arrow animation on path
+                showPulse: true, // Pulse animation on path
+                pulseIterations: Infinity, // How many times to play the pulse animation
+              },
+            });
 
-        // Set the map (floor level) to start at the beginning of the path
-        mapView.setMap(directions.path[0].map);
+            // Set the map (floor level) to start at the beginning of the path
+            mapView.setMap(directions.path[0].map);
+          }
+        }
+        // Update the selected map state
+        setSelectedMap(mapView.currentMap);
       }
-    }
-    // Update the selected map state
-    setSelectedMap(mapView.currentMap);
+    );
   }, [mapView, venue]);
 
   // Track the selected map with state, for the UI
