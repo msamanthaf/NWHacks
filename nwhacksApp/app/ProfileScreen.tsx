@@ -1,9 +1,8 @@
 import { Text, View } from "react-native";
-import React, { Component } from "react";
 
 export default function ProfileScreen() {
   return (
-    <View>
+    <View className="items-center justify-center text-center">
       <Text>ProfileScreen</Text>
     </View>
   );
