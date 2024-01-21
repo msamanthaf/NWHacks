@@ -64,11 +64,11 @@ export default function Map() {
       googleMapsApiKey={gmaps}
       libraries={['places']}
     >
-      <div className="w-full h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">
+      <div className="w-screen h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">
         <div className="flex">
           <Image alt={"logo"} src={"/logo.png"} width={67} height={67} />
           <div className=" flex justify-center items-start flex-col ml-2">
-            <div className=" font-semibold text-3xl">NavUBC</div>
+            <div className=" font-semibold text-3xl">Thirst Taps</div>
           </div>
         </div>
 

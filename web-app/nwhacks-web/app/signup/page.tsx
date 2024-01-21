@@ -10,7 +10,7 @@ export default function SignUp() {
         <Image alt={"logo"} src={"/logo.png"} width={67} height={67} />
         <div className=" flex justify-center items-start flex-col ml-2">
           <div className=" text-base">WELCOME TO</div>
-          <div className=" font-semibold text-3xl">NavUBC</div>
+          <div className=" font-semibold text-3xl">Thirst Taps</div>
         </div>
       </div>
 
