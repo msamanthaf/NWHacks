@@ -133,10 +133,6 @@ export default function Map() {
   }, [mapView, venue, spokenText]);
 
 
-  // Track the selected map with state, for the UI
-  const [selectedMap, setSelectedMap] = useState<MappedinMap | undefined>();
-
-
   (mapView, (map) => {
     setSelectedMap(map);
   });
@@ -179,13 +175,12 @@ export default function Map() {
 
       </div>
 
-      {/* selector */}
-      <div id="ui">
+{/* selector */}
+<div id="ui">
         {venue?.venue.name ?? "Loading..."}
         {venue && selectedMap && (
           <>
             {/* Flooor */}
-
             <select
               value={selectedMap.id}
               onChange={(e) => {
@@ -201,16 +196,18 @@ export default function Map() {
                 }
               }}
             >
-              {venue?.maps.map((level, index) => (
-                <option value={level.id} key={index}>
-                  {level.name}
-                </option>
-              ))}
+              {venue?.maps.map((level, index) => {
+                return (
+                  <option value={level.id} key={index}>
+                    {level.name}
+                  </option>
+                );
+              })}
             </select>
-          )}
-        </div>
-        <div id="map-container" ref={elementRef}></div>
+          </>
+        )}
       </div>
+
       {/* Map */}
       <div id="map-container" ref={elementRef}></div>
 

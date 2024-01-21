@@ -20,13 +20,14 @@ export default function Map() {
   const [selectedAddress, setSelectedAddress] = useState('');
 
   const handlePlaceSelect = () => {
-    if (autocomplete !== null) {
-      const place = autocomplete.getPlace();
-      setSelectedPlace(place);
-      setSpokenText(place.formatted_address);
+	if (autocomplete !== null) {
+	  const place = autocomplete.getPlace();
+	  setSelectedPlace(place);
+	  setSpokenText(place.formatted_address);
 	  setSelectedAddress(place.formatted_address);
-    }
+	}
   };
+  
 
   const startSpeechRecognition = () => {
     if ("webkitSpeechRecognition" in window) {
@@ -69,7 +70,7 @@ export default function Map() {
       googleMapsApiKey={"AIzaSyDo519HVtLLhIHbmUAcLzbZm8OJaPLR7iE"}
       libraries={["places"]}
     >
-      <div className="w-screen h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">
+    <div className="w-screen h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">
         <div className="flex">
           <Image alt={"logo"} src={"/logo.png"} width={67} height={67} />
           <div className=" flex justify-center items-start flex-col ml-2">
