@@ -126,7 +126,7 @@ export default function Map() {
             </div>
           </Link>
 
-		  <Link href={isAddressValid() ? "/login" : "#"}  className="w-1/3 flex justify-end">
+		  <Link href={isAddressValid() ? "/mappedIn" : "#"}  className="w-1/3 flex justify-end">
             <div className={`bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold ${isAddressValid() ? "" : "cursor-not-allowed opacity-50"}`}>
               Next
             </div>
