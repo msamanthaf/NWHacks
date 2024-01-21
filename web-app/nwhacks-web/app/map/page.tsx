@@ -121,9 +121,10 @@ export default function Map() {
         )}
 
         <div className="flex justify-between">
-          <Link href="/signup" className="w-1/3 flex justify-start">
-            <div className="bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold">
-              Back
+          <Link href="/signup" className="w-[100px] flex justify-start">
+            <div className="bg-[#0D1F40] w-[100px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold p-[8]"
+            style={{position: "absolute", left: 20, top: 30}}>
+              Log out
             </div>
           </Link>
 

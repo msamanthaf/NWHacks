@@ -147,7 +147,9 @@ export default function Map() {
           {/* Profile text */}
           <div className="text-right text-base">
             <p>Daniel</p>
-            <p className="font-extralight">View Profile</p>
+            <Link href="/profile">
+              <p className="font-extralight">View Profile</p>
+            </Link>
           </div>
           <div className="h-12 w-12 bg-slate-300 rounded-full" />
         </div>
@@ -171,7 +173,6 @@ export default function Map() {
         >
           {isListening ? "Listening..." : "Start Listening"}
         </Button>
-        
       </div>
 
       {/* selector */}
@@ -209,7 +210,10 @@ export default function Map() {
 
       {/* Map */}
       <div id="map-container" ref={elementRef}></div>
-      <Link href="/map" className="w-1/3 flex justify-start absolute bottom-16 right-4">
+      <Link
+        href="/map"
+        className="w-1/3 flex justify-start absolute bottom-16 right-4"
+      >
         <div className="bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold">
           Found it!
         </div>
