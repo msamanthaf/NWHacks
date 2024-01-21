@@ -5,10 +5,13 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start",
+    "start": "npm run dev",
     "lint": "next lint"
   },
   "dependencies": {
+
+    "@mappedin/mappedin-js": "^5.26.0",
+
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.5",
@@ -19,6 +22,7 @@
     "react": "^18",
     "react-dom": "^18",
     "react-speech-recognition": "^3.10.0"
+
   },
   "devDependencies": {
     "@types/node": "^20",
