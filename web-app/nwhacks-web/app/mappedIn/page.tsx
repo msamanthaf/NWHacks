@@ -14,8 +14,6 @@ import "@/app/globals.css";
 import getLocation from "../getLocation";
 import MicIcon from "@mui/icons-material/Mic";
 
-
-
 /* This demo shows you how to draw a path between two locations. */
 
 export default function Map() {
@@ -53,7 +51,8 @@ export default function Map() {
     () => ({
       mapId: "65acc6a1ca641a9a1399dc75",
       key: "65ad46db83bd240b9aaf48bb",
-      secret: "2eab22d952cdd43cf3edaa10bfa2fbd959508be823aabd8f491c006864b195e6",
+      secret:
+        "2eab22d952cdd43cf3edaa10bfa2fbd959508be823aabd8f491c006864b195e6",
     }),
     []
   );
@@ -70,7 +69,6 @@ export default function Map() {
 
   const { elementRef, mapView } = useMapView(venue, mapOptions);
   const [selectedMap, setSelectedMap] = useState<MappedinMap | undefined>();
-
 
   useEffect(() => {
     if (!mapView || !venue) {
@@ -132,13 +130,12 @@ export default function Map() {
     });
   }, [mapView, venue, spokenText]);
 
-
-  (mapView, (map) => {
-    setSelectedMap(map);
-  });
+  mapView,
+    (map) => {
+      setSelectedMap(map);
+    };
 
   return (
-
     <div id="app">
       {/* Header */}
       <div className="mt-12 px-6 justify-between flex flex-row">
@@ -155,7 +152,7 @@ export default function Map() {
       </div>
 
       {/* Text */}
-      <div className="mt-12 px-6">
+      <div className="mt-4 px-6 space-y-5 mb-4">
         <p className="text-xl font-medium">Talk your way</p>
         <TextField
           label="Tell the AI which venue is nearby and your destination"
@@ -172,11 +169,10 @@ export default function Map() {
         >
           {isListening ? "Listening..." : "Start Listening"}
         </Button>
-
       </div>
 
-{/* selector */}
-<div id="ui">
+      {/* selector */}
+      <div id="ui">
         {venue?.venue.name ?? "Loading..."}
         {venue && selectedMap && (
           <>
@@ -210,7 +206,6 @@ export default function Map() {
 
       {/* Map */}
       <div id="map-container" ref={elementRef}></div>
-
     </div>
   );
 }
