@@ -212,7 +212,7 @@ export default function Map() {
       <div id="map-container" ref={elementRef}></div>
       <Link
         href="/map"
-        className="w-1/3 flex justify-start absolute bottom-16 right-4"
+        className="w-1/3 flex justify-center absolute bottom-16 right-4"
       >
         <div className="bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold">
           Found it!
