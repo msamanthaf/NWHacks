@@ -14,6 +14,10 @@ import "@/app/globals.css";
 import getLocation from "../getLocation";
 import MicIcon from "@mui/icons-material/Mic";
 
+
+
+/* This demo shows you how to draw a path between two locations. */
+
 export default function Map() {
   const [spokenText, setSpokenText] = useState("");
   const [isListening, setIsListening] = useState(false);
@@ -66,6 +70,7 @@ export default function Map() {
 
   const { elementRef, mapView } = useMapView(venue, mapOptions);
   const [selectedMap, setSelectedMap] = useState<MappedinMap | undefined>();
+
 
   useEffect(() => {
     if (!mapView || !venue) {
@@ -127,14 +132,36 @@ export default function Map() {
     });
   }, [mapView, venue, spokenText]);
 
-  useMapChanged(mapView, (map) => {
+
+  // Track the selected map with state, for the UI
+  const [selectedMap, setSelectedMap] = useState<MappedinMap | undefined>();
+
+
+  (mapView, (map) => {
     setSelectedMap(map);
   });
 
   return (
-    <div className="max-h-screen max-w-screen">
-      <div id="app">
-	  <TextField
+
+    <div id="app">
+      {/* Header */}
+      <div className="mt-12 px-6 justify-between flex flex-row">
+        <p className="text-3xl font-semibold">Thirst Taps</p>
+        {/* Profile */}
+        <div className="justify-between flex flex-row gap-2">
+          {/* Profile text */}
+          <div className="text-right text-base">
+            <p>Daniel</p>
+            <p className="font-extralight">View Profile</p>
+          </div>
+          <div className="h-12 w-12 bg-slate-300 rounded-full" />
+        </div>
+      </div>
+
+      {/* Text */}
+      <div className="mt-12 px-6">
+        <p className="text-xl font-medium">Talk your way</p>
+        <TextField
           label="Tell the AI which venue is nearby and your destination"
           variant="outlined"
           value={spokenText}
@@ -149,9 +176,16 @@ export default function Map() {
         >
           {isListening ? "Listening..." : "Start Listening"}
         </Button>
-        <div id="ui">
-          {venue?.venue.name ?? "Loading..."}
-          {venue && selectedMap && (
+
+      </div>
+
+      {/* selector */}
+      <div id="ui">
+        {venue?.venue.name ?? "Loading..."}
+        {venue && selectedMap && (
+          <>
+            {/* Flooor */}
+
             <select
               value={selectedMap.id}
               onChange={(e) => {
@@ -177,6 +211,9 @@ export default function Map() {
         </div>
         <div id="map-container" ref={elementRef}></div>
       </div>
+      {/* Map */}
+      <div id="map-container" ref={elementRef}></div>
+
     </div>
   );
 }
