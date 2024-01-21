@@ -14,6 +14,8 @@ import "@/app/globals.css";
 import getLocation from "../getLocation";
 import MicIcon from "@mui/icons-material/Mic";
 
+import Link from "next/link";
+
 /* This demo shows you how to draw a path between two locations. */
 
 export default function Map() {
@@ -130,10 +132,10 @@ export default function Map() {
     });
   }, [mapView, venue, spokenText]);
 
-  mapView,
-    (map) => {
-      setSelectedMap(map);
-    };
+  /* Monitor floor level changes and update the UI */
+  useMapChanged(mapView, (map) => {
+    setSelectedMap(map);
+  });
 
   return (
     <div id="app">
@@ -169,6 +171,7 @@ export default function Map() {
         >
           {isListening ? "Listening..." : "Start Listening"}
         </Button>
+        
       </div>
 
       {/* selector */}
@@ -206,6 +209,11 @@ export default function Map() {
 
       {/* Map */}
       <div id="map-container" ref={elementRef}></div>
+      <Link href="/map" className="w-1/3 flex justify-start absolute bottom-16 right-4">
+        <div className="bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold">
+          Found it!
+        </div>
+      </Link>
     </div>
   );
 }
