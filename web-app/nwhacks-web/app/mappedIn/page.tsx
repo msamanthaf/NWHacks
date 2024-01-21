@@ -14,6 +14,9 @@ import "@/app/globals.css";
 
 import getLocation from "../getLocation";
 
+import MicIcon from "@mui/icons-material/Mic";
+import { TextField, Button } from "@mui/material";
+
 /* This demo shows you how to draw a path between two locations. */
 export default function Map() {
   const credentials = useMemo<TGetVenueMakerOptions>(
@@ -56,6 +59,36 @@ export default function Map() {
 
   // console.log(locationsID);
 
+  const [spokenText, setSpokenText] = useState("");
+  const [isListening, setIsListening] = useState(false);
+
+  const startSpeechRecognition = () => {
+    if ("webkitSpeechRecognition" in window) {
+      const recognition = new window.webkitSpeechRecognition();
+
+      recognition.onstart = () => {
+        setIsListening(true);
+      };
+
+      recognition.onend = () => {
+        setIsListening(false);
+      };
+
+      recognition.onresult = (event) => {
+        const spokenResult = event.results[0][0].transcript;
+        setSpokenText(spokenResult);
+      };
+
+      recognition.onerror = (event) => {
+        console.error("Speech recognition error:", event.error);
+      };
+
+      recognition.start();
+    } else {
+      console.error("Speech recognition not supported in this browser");
+    }
+  };
+
   /* Start navigation when the map loads */
   useEffect(() => {
     if (!mapView || !venue) {
@@ -65,9 +98,7 @@ export default function Map() {
     // get location from text
     let locationArray: any = [];
 
-    getLocation(
-      "I am in front of perugia right now, where can i find the nearest fountain?"
-    ).then((data) => {
+    getLocation(spokenText).then((data) => {
       locationArray = data;
 
       // console.log(locationArray[0]);
@@ -131,7 +162,7 @@ export default function Map() {
       // Update the selected map state
       setSelectedMap(mapView.currentMap);
     });
-  }, [mapView, venue]);
+  }, [mapView, venue, spokenText]);
 
   // Track the selected map with state, for the UI
   const [selectedMap, setSelectedMap] = useState<MappedinMap | undefined>();
@@ -143,6 +174,41 @@ export default function Map() {
 
   return (
     <div id="app">
+      {/* Header */}
+      <div className="mt-12 px-6 justify-between flex flex-row">
+        <p className="text-3xl font-semibold">Thirst Taps</p>
+        {/* Profile */}
+        <div className="justify-between flex flex-row gap-2">
+          {/* Profile text */}
+          <div className="text-right text-base">
+            <p>Daniel</p>
+            <p className="font-extralight">View Profile</p>
+          </div>
+          <div className="h-12 w-12 bg-slate-300 rounded-full" />
+        </div>
+      </div>
+
+      {/* Text */}
+      <div className="mt-12 px-6">
+        <p className="text-xl font-medium">Talk your way</p>
+        <TextField
+          label="Tell the AI which venue is nearby and your destination"
+          variant="outlined"
+          value={spokenText}
+          fullWidth
+          onChange={(e) => setSpokenText(e.target.value)}
+        />
+        <Button
+          variant="outlined"
+          onClick={startSpeechRecognition}
+          startIcon={<MicIcon />}
+          disabled={isListening}
+        >
+          {isListening ? "Listening..." : "Start Listening"}
+        </Button>
+      </div>
+
+      {/* selector */}
       <div id="ui">
         {venue?.venue.name ?? "Loading..."}
         {venue && selectedMap && (
@@ -175,6 +241,7 @@ export default function Map() {
         )}
       </div>
 
+      {/* Map */}
       <div id="map-container" ref={elementRef}></div>
     </div>
   );
