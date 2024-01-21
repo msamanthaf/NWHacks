@@ -11,7 +11,7 @@ export default function LogIn() {
         <Image alt={"logo"} src={"/logo.png"} width={67} height={67} />
         <div className=" flex justify-center items-start flex-col ml-2">
           <div className=" text-base">WELCOME TO</div>
-          <div className=" font-semibold text-3xl">NavUBC</div>
+          <div className=" font-semibold text-3xl">Thirst Taps</div>
         </div>
       </div>
 
@@ -27,7 +27,7 @@ export default function LogIn() {
         </div>
       </div>
 
-      <Link href="/maps" className="w-full flex justify-center">
+      <Link href="/map" className="w-full flex justify-center">
           <div className=" bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold">
             Log in
           </div>

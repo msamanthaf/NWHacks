@@ -17,12 +17,14 @@ export default function Map() {
   const [isListening, setIsListening] = useState(false);
   const [autocomplete, setAutocomplete] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState('');
 
   const handlePlaceSelect = () => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
       setSelectedPlace(place);
       setSpokenText(place.formatted_address);
+	  setSelectedAddress(place.formatted_address);
     }
   };
 
@@ -55,6 +57,11 @@ export default function Map() {
 
   const handleTyping = (event) => {
     setSpokenText(event.target.value);
+	setSelectedAddress(event.target.value);
+  };
+
+  const isAddressValid = () => {
+    return selectedPlace && selectedPlace.formatted_address.includes("2350 Health Sciences");
   };
 
   return (
@@ -62,11 +69,11 @@ export default function Map() {
       googleMapsApiKey={"AIzaSyDo519HVtLLhIHbmUAcLzbZm8OJaPLR7iE"}
       libraries={["places"]}
     >
-      <div className="w-full h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">
+      <div className="w-screen h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">
         <div className="flex">
           <Image alt={"logo"} src={"/logo.png"} width={67} height={67} />
           <div className=" flex justify-center items-start flex-col ml-2">
-            <div className=" font-semibold text-3xl">NavUBC</div>
+            <div className=" font-semibold text-3xl">Thirst Taps</div>
           </div>
         </div>
 
@@ -119,8 +126,8 @@ export default function Map() {
             </div>
           </Link>
 
-          <Link href="/map" className="w-1/3 flex justify-end">
-            <div className="bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold">
+		  <Link href={isAddressValid() ? "/login" : "#"}  className="w-1/3 flex justify-end">
+            <div className={`bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold ${isAddressValid() ? "" : "cursor-not-allowed opacity-50"}`}>
               Next
             </div>
           </Link>
