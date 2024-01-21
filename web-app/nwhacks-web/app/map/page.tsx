@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import MicIcon from '@mui/icons-material/Mic';
 import { GoogleMap, LoadScript, Autocomplete, Marker } from '@react-google-maps/api';
+import gmaps from './gmaps';
 
 export default function Map() {
   const [spokenText, setSpokenText] = useState('');
@@ -53,7 +54,7 @@ export default function Map() {
 
   return (
     <LoadScript
-      googleMapsApiKey="AIzaSyDo519HVtLLhIHbmUAcLzbZm8OJaPLR7iE"
+      googleMapsApiKey={gmaps}
       libraries={['places']}
     >
       <div className="w-full h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">
