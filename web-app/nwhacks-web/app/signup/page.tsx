@@ -19,7 +19,7 @@ export default function SignUp() {
       </div>
 
       {/* Text Fields */}
-      <div className=" text-base flex-col flex" style={{gap: 10}}>
+      <div className=" text-base flex-col flex" style={{ gap: 10 }}>
         <div>
           Name
           <TextField fullWidth placeholder="Name" />
@@ -38,11 +38,59 @@ export default function SignUp() {
         </div>
       </div>
 
-      <Link href="/login" className="w-full flex justify-center">
+      <Link href="/map" className="w-full flex justify-center">
         <div className=" bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold">
           Sign Up
         </div>
       </Link>
+      <div className="flex justify-center items-center w-full flex-col">
+        <div className="flex justify-center items-center w-full">
+          <div
+            style={{
+              width: 122.82779693603516,
+              height: 0,
+              borderWidth: 2,
+              borderColor: "rgba(215, 223, 237, 1.0)",
+            }}
+          />
+          <div
+            style={{
+              width: 92.120849609375,
+              fontSize: 14,
+              fontWeight: "500",
+              fontStyle: "normal",
+              color: "#6A707C",
+              margin: 5,
+            }}
+          >
+            <text>or log in with</text>
+          </div>
+          <div
+            style={{
+              width: 122.82779693603516,
+              height: 0,
+              borderWidth: 2,
+              borderColor: "rgba(215, 223, 237, 1.0)",
+            }}
+          />
+        </div>
+        <div
+          style={{
+            width: "100%",
+            height: 61.41389846801758,
+            borderRadius: 8,
+            backgroundColor: "#FFFFFF",
+            borderWidth: 2,
+            borderColor: "rgba(215, 223, 237, 1.0)",
+          }}
+          className="flex justify-center items-center"
+        >
+          <Image alt="google" src={"/google_icon.png"} width={30} height={30} />
+        </div>
+      </div>
+      <div className="text-[#0D1F40] flex items-center justify-center">
+        Already have an account? <Link href={'/login'} style={{fontWeight: 500}}>Login Now</Link>
+      </div>
     </div>
   );
 }
