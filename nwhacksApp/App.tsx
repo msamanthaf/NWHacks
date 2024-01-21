@@ -1,3 +1,8 @@
+
+/** SINCE WE'RE USING EXPO ROUTER FOR NAVIGATION, 
+ * WE'RE NOT USING THIS FILE, GO TO app/index.tsx and app/_layout.tsx instead
+ */
+
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
