@@ -11,7 +11,8 @@ import useMapChanged from "../hooks/useMapChanged";
 import useMapView from "../hooks/useMapView";
 import useVenueMaker from "../hooks/useVenueMaker";
 import "./globals.css";
-import test from "node:test";
+
+import getLocation from "./getLocation";
 
 /* This demo shows you how to draw a path between two locations. */
 export default function NavigationExample() {
@@ -41,14 +42,13 @@ export default function NavigationExample() {
   );
   const { elementRef, mapView } = useMapView(venue, mapOptions);
   // console.log("🚀 ~ NavigationExample ~ venue:", venue?.locations);
- 
 
-  let locationsID: any = [];
-  venue?.locations.map((location) => {
-    locationsID.push(location.id);
-  });
+  // let locationsID: any = [];
+  // venue?.locations.map((location) => {
+  //   locationsID.push(location.id);
+  // });
 
-  console.log(locationsID);
+  // console.log(locationsID);
 
   /* Start navigation when the map loads */
   useEffect(() => {
@@ -56,17 +56,23 @@ export default function NavigationExample() {
       return;
     }
 
+    // get location from text
+    const locationJSON = getLocation(
+      "I want to go to the washroom, i am beside the stairs"
+    );
+    if (locationJSON) console.log("cwecfewfe",locationJSON.from);
+
     /*
      * All maps made in Maker will contain a location called "footprintcomponent"
      * which represents the exterior "footprint"
      * You can use this location to get the nearest entrance or exit
      */
     const startLocation = venue.locations.find((location) =>
-      location.id.includes("footprintcomponent")
+      location.id.includes(locationJSON.from)
     );
     // Navigate to some location on another floor
     const endLocation = venue.locations.find((location) =>
-      location.id.includes("safewalk")
+      location.id.includes(locationJSON.destination)
     );
 
     if (startLocation && endLocation) {
@@ -125,34 +131,38 @@ export default function NavigationExample() {
   });
 
   return (
-    <div id="app">
-      <div id="ui">
-        {venue?.venue.name ?? "Loading..."}
-        {venue && selectedMap && (
-          <select
-            value={selectedMap.id}
-            onChange={(e) => {
-              if (!mapView || !venue) {
-                return;
-              }
+    <div className="max-h-screen max-w-screen">
+      <div id="app">
+        <div id="ui">
+          {venue?.venue.name ?? "Loading..."}
+          {venue && selectedMap && (
+            <select
+              value={selectedMap.id}
+              onChange={(e) => {
+                if (!mapView || !venue) {
+                  return;
+                }
 
-              const floor = venue.maps.find((map) => map.id === e.target.value);
-              if (floor) {
-                mapView.setMap(floor);
-              }
-            }}
-          >
-            {venue?.maps.map((level, index) => {
-              return (
-                <option value={level.id} key={index}>
-                  {level.name}
-                </option>
-              );
-            })}
-          </select>
-        )}
+                const floor = venue.maps.find(
+                  (map) => map.id === e.target.value
+                );
+                if (floor) {
+                  mapView.setMap(floor);
+                }
+              }}
+            >
+              {venue?.maps.map((level, index) => {
+                return (
+                  <option value={level.id} key={index}>
+                    {level.name}
+                  </option>
+                );
+              })}
+            </select>
+          )}
+        </div>
+        <div id="map-container" ref={elementRef}></div>
       </div>
-      <div id="map-container" ref={elementRef}></div>
     </div>
   );
 }
