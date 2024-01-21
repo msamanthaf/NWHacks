@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function SignUp() {
   return (
-    <div className="w-full h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">
+    <div className="w-screen h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">
       {/* Header */}
       <div className="flex">
         <Image alt={"logo"} src={"/logo.png"} width={67} height={67} />

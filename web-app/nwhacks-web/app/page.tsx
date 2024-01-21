@@ -5,7 +5,7 @@ export default function Home() {
   const handleLogIn = () => {};
 
   return (
-    <div className="w-full h-screen bg-[#EAF6FF] text-[#0D1F40] flex justify-center items-center flex-col gap-[20px]">
+    <div className="w-screen h-screen bg-[#EAF6FF] text-[#0D1F40] flex justify-center items-center flex-col gap-[20px]">
       <Image alt={"logo"} src={"/logo.png"} width={221} height={221} />
       <div className=" flex justify-center items-center flex-col">
         <div className=" text-lg font-">WELCOME TO</div>
