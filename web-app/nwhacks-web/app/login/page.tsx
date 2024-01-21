@@ -27,7 +27,7 @@ export default function LogIn() {
         </div>
       </div>
 
-      <Link href="/maps" className="w-full flex justify-center">
+      <Link href="/map" className="w-full flex justify-center">
           <div className=" bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold">
             Log in
           </div>

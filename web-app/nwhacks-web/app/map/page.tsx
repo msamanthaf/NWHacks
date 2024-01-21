@@ -12,12 +12,14 @@ export default function Map() {
   const [isListening, setIsListening] = useState(false);
   const [autocomplete, setAutocomplete] = useState(null);
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [selectedAddress, setSelectedAddress] = useState('');
 
   const handlePlaceSelect = () => {
     if (autocomplete !== null) {
       const place = autocomplete.getPlace();
       setSelectedPlace(place);
       setSpokenText(place.formatted_address);
+	  setSelectedAddress(place.formatted_address);
     }
   };
 
@@ -50,6 +52,11 @@ export default function Map() {
 
   const handleTyping = (event) => {
     setSpokenText(event.target.value);
+	setSelectedAddress(event.target.value);
+  };
+
+  const isAddressValid = () => {
+    return selectedPlace && selectedPlace.formatted_address.includes("2350 Health Sciences");
   };
 
   return (
@@ -108,8 +115,8 @@ export default function Map() {
             </div>
           </Link>
 
-          <Link href="/map" className="w-1/3 flex justify-end">
-            <div className="bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold">
+		  <Link href={isAddressValid() ? "/login" : "#"}  className="w-1/3 flex justify-end">
+            <div className={`bg-[#0D1F40] w-[244px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold ${isAddressValid() ? "" : "cursor-not-allowed opacity-50"}`}>
               Next
             </div>
           </Link>
