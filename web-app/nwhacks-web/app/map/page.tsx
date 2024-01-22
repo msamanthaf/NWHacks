@@ -67,7 +67,7 @@ export default function Map() {
 
   return (
     <LoadScript
-      googleMapsApiKey={"AIzaSyDo519HVtLLhIHbmUAcLzbZm8OJaPLR7iE"}
+      googleMapsApiKey={"GMAPSAPIKEY"}
       libraries={["places"]}
     >
     <div className="w-screen h-screen bg-[#FFFF] text-[#0D1F40] flex flex-col gap-[20px] px-[10%] justify-center">

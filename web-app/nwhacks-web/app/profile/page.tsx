@@ -5,7 +5,7 @@ import Link from "next/link";
 export default function Profile() {
   return (
     <div className="bg-[#FFFF] flex w-screen h-screen flex-col p-[15]">
-      <Link href="/map" className="w-full flex justify-center m-[20]">
+      <Link href="/" className="w-full flex justify-center m-[20]">
         <div
           className=" bg-[#0D1F40] w-[100px] h-[60px] rounded-lg text-white flex justify-center items-center font-semibold "
           style={{ position: "absolute", right: 10, top: 20 }}
